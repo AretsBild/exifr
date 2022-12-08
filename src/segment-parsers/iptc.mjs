@@ -83,7 +83,7 @@ export default class Iptc extends AppSegmentParserBase {
                 foundFirstProp = true
 				let size = this.chunk.getUint16(offset + 3)
 				let key = this.chunk.getUint8(offset + 2)
-				let val = this.chunk.getLatin1String(offset + 5, size)
+				let val = Buffer.from(this.chunk.getLatin1String(offset + 5, size), 'latin1').toString('utf8')
 				raw.set(key, this.pluralizeValue(raw.get(key), val))
 				// skip iterating over the bytes we've already read
 				offset += 4 + size
